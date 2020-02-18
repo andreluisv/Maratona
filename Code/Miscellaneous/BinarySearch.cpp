@@ -34,5 +34,5 @@ bool find(int num, int l, int r){
 		else if(arr[m] > num) r=m;
 		else l=m+1;
 	}
-	return false;
+	return (arr[l] == num);
 }
