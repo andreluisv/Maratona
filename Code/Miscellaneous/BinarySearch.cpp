@@ -28,7 +28,7 @@ vector<int> arr;
 
 //find(num, 0, arr.size()-1);
 bool find(int num, int l, int r){
-	while(l<=r){
+	while(l<r){
 		int m = (l+r)/2;
 		if (arr[m] == num)return true;
 		else if(arr[m] > num) r=m;
