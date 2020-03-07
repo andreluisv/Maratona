@@ -1,28 +1,37 @@
 //Longest Increasing Subsequence
 
-vector<int> data, dp, ans;
-dp.resize(data.size(), 1); ans.resize(data.size(), -1);
-pair<int, int> best = {0,0};
+const int ms = 1e7 + 5;
 
-for (int i = 0; i < data.size(); i++){
-	for (int j = 0; j < i; j++){
-		if (data[j] < data[i]){
-			//dp[i] = max(dp[i], dp[j]+1);
-			if (dp[j]+1 > dp[i]){
-				dp[i] = dp[j]+1;
-				ans[i] = j;
-			}
-		}
+int arr[ms], lisArr[ms], n;
+int bef[ms], pos[ms];//
+
+int lis(){
+	int len = 1;
+	lisArr[0] = arr[0];
+	bef[0] = -1;//
+	for (int i = 1; i < n; i++){
+		// upper_bound se non-decreasing
+		int x = lower_bound(lisArr, lisArr+len, arr[i]) - lisArr;
+		len = max(len, x+1);
+		lisArr[x] = arr[i];
+		pos[x] = i;//
+		bef[i] = (x) ? pos[x-1] : -1;//
 	}
-	best = max(best, {dp[i], i});
-	//if (best.x < dp[i]) best = {dp[i], i};
+	return len;
 }
 
-int index = best.y; set<int> print;
-while(index > -1){
-	print.insert(data[index]);
-	index = ans[index];
+vector<int> getLis(){
+	int len = lis();
+	vector<int> ans;
+	for (int i = pos[len-1]; i >= 0; i = bef[i]){
+		ans.push_back(arr[i]);
+	}
+	reverse(ans.begin(), ans.end());
+	return ans;
 }
 
-printf("Size of LIS: %d\n", best.x);
+
+vector<int> print = getLis();
+
+printf("Size of LIS: %d\n", print.size());
 for (auto x : print) printf("%d\n", x);
