@@ -3,7 +3,7 @@ const int N = 1025, M = 1025;
 int mat[N][M], aux[N][M];
 
 void preProcess(){
-	for (int j = 0; j < M; i++)
+	for (int j = 0; j < M; j++)
 		aux[0][j] = mat[0][j];
 		
 	for (int i = 1; i < N; i++)
