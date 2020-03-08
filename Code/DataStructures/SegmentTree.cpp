@@ -1,4 +1,4 @@
-vi cell(maxn), tree(4*maxn);
+int cell[maxn], tree[4*maxn];
 
 void build(int pos, int i, int j){
 	int mid = (i+j)/2;
@@ -47,8 +47,14 @@ void update(int pos, int i, int j, int x, int value){
 	tree[pos] = tree[esq] + tree[dir];
 }
 
-/*
-build(1,0,N-1);
-update(1, 0, N-1, pos, valores[str])
-query(1, 0, N-1, i, j)
-*/
+/*O array de cell começa a partir de 1 até n
+Não precisa mexer na tree, basta chamar o build*/
+			build(1,0,n);
+
+/*O update você sempre chama de 0 a n
+O pos é onde você vai atualizar e o newValue é oque*/
+		update(1, 0, n, pos, newValue);
+
+/*No query basta dar o intervalo l, r que ele retorna
+			1 <= l <= r <= n*/
+			query(1, 0, n, l, r);
