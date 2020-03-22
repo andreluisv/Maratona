@@ -1,7 +1,7 @@
 class minStack{
 	public:
-	stack<int> pilha;
-	int min = INT_MAX;
+	stack<long long> pilha;
+	long long min = INT_MAX;
 	
 	void push(int x){
 		if (pilha.empty()){
@@ -10,7 +10,7 @@ class minStack{
 		}else{
 			if (x >= min) pilha.push(x);
 			else{
-				pilha.push(2*x-min);
+				pilha.push(2LL*x-min);
 				min = x;
 			}
 		}
@@ -18,18 +18,24 @@ class minStack{
 	
 	int pop(){
 		if (pilha.empty()){
-			return -1;
+			return -1;//fail flag
 		}
 		int y = pilha.top();
 		pilha.pop();
 		if (y < min){
-			min = 2*min - y;
+			min = 2LL*min - y;
 		}		
-		return 1;
+		return 1;//success
+	}
+	
+	int top(){
+		if (pilha.empty()) return -1;//fail flag
+		if (pilha.top() > min) return pilha.top();
+		return min;
 	}
 	
 	int getMin(){
-		if (pilha.empty()) return -1;
+		if (pilha.empty()) return -1;//fail flag
 		return this->min;
 	}
 		
