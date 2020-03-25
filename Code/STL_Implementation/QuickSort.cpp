@@ -29,3 +29,30 @@ void quickSort(int arr[], int first, int last){
 /*
 quickSort(arr, 0, size-1);
 */
+
+int quicksorthelp(int arr[], int l, int h){
+	int pivot = arr[l];
+	int i = l, j = h;
+	while(i<j){
+		do{
+			i++;
+		}while(arr[i] <= pivot);
+		do{
+			j--;
+		}while(arr[j] > pivot);
+		if (i<j) swap(arr[i], arr[j]);
+	}
+	swap(arr[l], arr[j]);
+	return j;
+}
+void quicksort(int arr[], int l, int h){
+	if (l<h){
+		int pivot = quicksorthelp(arr, l, h);
+		quicksort(arr, l, pivot);
+		quicksort(arr, pivot+1, h);
+	}
+}
+/*
+quicksort(arr, 0, size);
+*/
+
