@@ -26,3 +26,7 @@ ll comb(ll n, ll k){
  
 	return ret;
 }
+
+ll arra(ll n, ll k){
+	return ((comb(n,k)%mod) * (fat[k]%mod))%mod;
+}
